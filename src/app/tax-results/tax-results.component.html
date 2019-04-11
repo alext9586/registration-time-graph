@@ -1,0 +1,16 @@
+<table>
+  <thead>
+    <th>Year</th>
+    <th>Govt Svc Tax</th>
+    <th>Sup Govt Svc Tax</th>
+    <th>Total</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let yearTaxes of taxResults">
+      <td>{{yearTaxes.year}}</td>
+      <td>{{yearTaxes.govtServicesTax | currency}}</td>
+      <td>{{yearTaxes.supplemetalGovtTax | currency}}</td>
+      <td>{{yearTaxes.total | currency}}</td>
+    </tr>
+  </tbody>
+</table>
