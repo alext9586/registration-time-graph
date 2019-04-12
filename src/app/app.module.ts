@@ -5,12 +5,14 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { VehicleFormComponent } from './vehicle-form/vehicle-form.component';
 import { TaxResultsComponent } from './tax-results/tax-results.component';
+import { TaxResultChartComponent } from './tax-result-chart/tax-result-chart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     VehicleFormComponent,
-    TaxResultsComponent
+    TaxResultsComponent,
+    TaxResultChartComponent
   ],
   imports: [
     BrowserModule,

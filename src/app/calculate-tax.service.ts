@@ -6,7 +6,7 @@ import { TaxResult } from './tax-result';
 })
 export class CalculateTaxService {
 
-  public results = [];
+  public results: TaxResult[] = [];
 
   constructor() { }
 
@@ -33,11 +33,12 @@ export class CalculateTaxService {
     return new TaxResult(currentYear, govtServicesTax, supplementalGovtTax, total);
   }
 
-  public calculateTaxForYearRange(year: number, msrp: number) {
+  public calculateTaxForYearRange(year: number, msrp: number): void {
     let rangeOfYears = [];
     const now = new Date();
 
-    for (let i = year; i <= now.getFullYear(); i++) {
+    const finalYear = Math.max(year + 9, now.getFullYear());
+    for (let i = year; i <= finalYear; i++) {
       rangeOfYears.push(i);
     }
 
