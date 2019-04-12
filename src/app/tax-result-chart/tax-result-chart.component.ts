@@ -25,9 +25,7 @@ export class TaxResultChartComponent implements OnInit {
   private svg: any;
   private line: d3Shape.Line<[number, number]>;
 
-  get taxResults(): TaxResult[] {
-    return this.calculateTaxService.results;
-  }
+  private taxResults: TaxResult[] = [];
 
   constructor(private calculateTaxService: CalculateTaxService) {
     this.width = 900 - this.margin.left - this.margin.right;
@@ -35,6 +33,14 @@ export class TaxResultChartComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.draw();
+    this.calculateTaxService.getResultObservable().subscribe(data => {
+      this.taxResults = data;
+      this.draw();
+    });
+  }
+
+  private draw() {
     this.initSvg();
     this.initAxis();
     this.drawAxis();

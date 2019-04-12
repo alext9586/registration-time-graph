@@ -1,14 +1,20 @@
 import { Injectable } from '@angular/core';
 import { TaxResult } from './tax-result';
+import { Subject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CalculateTaxService {
+  private resultSubject: Subject<any> = new Subject<TaxResult[]>();
 
   public results: TaxResult[] = [];
 
   constructor() { }
+
+  public getResultObservable(): Observable<TaxResult[]> {
+    return this.resultSubject.asObservable();
+  }
 
   private calculateTax(year: number, msrp: number, currentYear: number): TaxResult {
     const baseValuation = msrp * 0.35;
@@ -45,5 +51,7 @@ export class CalculateTaxService {
     this.results = rangeOfYears.map(endYear => {
       return this.calculateTax(year, msrp, endYear);
     });
+
+    this.resultSubject.next(this.results);
   }
 }

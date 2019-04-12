@@ -9,13 +9,14 @@ import { TaxResult } from '../tax-result';
 })
 export class TaxResultsComponent implements OnInit {
 
-  get taxResults(): TaxResult[] {
-    return this.calculateTaxService.results;
-  }
+  private taxResults: TaxResult[] = [];
 
   constructor(private calculateTaxService: CalculateTaxService) { }
 
   ngOnInit() {
+    this.calculateTaxService.getResultObservable().subscribe(data => {
+      this.taxResults = data;
+    });
   }
 
 }
